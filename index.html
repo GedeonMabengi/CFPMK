@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CFP Art & Métiers de Kasapa — Formez-vous, bâtissez l'avenir</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f0f4f8;
+        }
+
+        .burger-line {
+            transition: all 0.3s ease-in-out;
+            transform-origin: center;
+        }
+
+        .menu-open .burger-line:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .menu-open .burger-line:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        .menu-open .burger-line:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        #mobile-menu {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+        }
+
+        .menu-link {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+        }
+
+        .menu-opened .menu-link {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .menu-opened .menu-link:nth-child(1) { transition-delay: 0.1s; }
+        .menu-opened .menu-link:nth-child(2) { transition-delay: 0.15s; }
+        .menu-opened .menu-link:nth-child(3) { transition-delay: 0.2s; }
+        .menu-opened .menu-link:nth-child(4) { transition-delay: 0.25s; }
+        .menu-opened .menu-link:nth-child(5) { transition-delay: 0.3s; }
+        .menu-opened .menu-link:nth-child(6) { transition-delay: 0.35s; }
+
+        .menu-overlay {
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .bento-card, .filiere-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .bento-card:hover, .filiere-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(15, 45, 82, 0.12);
+        }
+
+        .img-zoom {
+            transition: transform 0.6s ease;
+        }
+
+        .img-zoom:hover {
+            transform: scale(1.05);
+        }
+
+        .stat-number {
+            background: linear-gradient(135deg, #0f2d52 0%, #2563eb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .icon-ring {
+            background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #2563eb 100%);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .filiere-card:hover .icon-ring {
+            transform: scale(1.08) rotate(4deg);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.25);
+        }
+
+        .filiere-card:hover .icon-inner {
+            background-color: #f8fafc;
+        }
+    </style>
+<base target="_blank">
+</head>
+<body class="text-slate-900 antialiased pb-10 md:pb-20 overflow-x-hidden">
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 md:pt-6">
+
+        <!-- ================= NAVBAR ================= -->
+        <header class="flex items-center justify-between py-4 mb-4 md:mb-6 relative z-50">
+            <div class="flex items-center gap-2 sm:gap-3 font-bold text-base sm:text-lg md:text-xl tracking-tight text-slate-900">
+                <!-- Espace Logo Responsive -->
+                <div class="shrink-0">
+                    <img 
+                        src="assets/logo.png" 
+                        alt="Logo CFP Art & Métiers de Kasapa" 
+                        class="w-16 h-16 sm:w-10 sm:h-10 md:w-22 md:h-22 object-contain rounded-lg"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                    >
+                    <!-- Fallback si le logo n'est pas chargé -->
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-[#0f2d52] rounded-lg flex items-center justify-center text-white font-extrabold text-xs sm:text-sm hidden">
+                        CFPMK
+                    </div>
+                </div>
+                <div class="leading-tight">
+                    <span class="block">CFPMK</span>
+                </div>
+            </div>
+
+            <nav class="hidden md:flex items-center gap-5 lg:gap-8 text-sm font-medium text-slate-600">
+                <a href="#filieres" class="hover:text-[#0f2d52] transition-colors duration-200">Nos filières</a>
+                <a href="#pourquoi" class="hover:text-[#0f2d52] transition-colors duration-200">Pourquoi nous ?</a>
+                <a href="#admission" class="hover:text-[#0f2d52] transition-colors duration-200">Admission</a>
+                <a href="#temoignages" class="hover:text-[#0f2d52] transition-colors duration-200">Témoignages</a>
+                <a href="#contact" class="hover:text-[#0f2d52] transition-colors duration-200">Contact</a>
+            </nav>
+
+            <a href="#contact" class="hidden md:inline-block bg-[#0f2d52] text-white text-xs font-semibold px-5 py-2.5 rounded-full hover:bg-blue-900 transition-all duration-300 hover:shadow-lg hover:shadow-blue-900/20">
+                S'inscrire
+            </a>
+
+            <button id="menu-btn" class="md:hidden relative z-50 w-10 h-10 flex flex-col items-center justify-center gap-1.5 focus:outline-none" aria-label="Ouvrir le menu" aria-expanded="false">
+                <span class="burger-line w-6 h-0.5 bg-slate-900 block rounded-full"></span>
+                <span class="burger-line w-6 h-0.5 bg-slate-900 block rounded-full"></span>
+                <span class="burger-line w-6 h-0.5 bg-slate-900 block rounded-full"></span>
+            </button>
+        </header>
+
+        <!-- ================= MENU MOBILE ================= -->
+        <div id="mobile-menu" class="fixed inset-0 z-40 pointer-events-none opacity-0 md:hidden">
+            <div id="menu-overlay" class="absolute inset-0 bg-slate-900/60 menu-overlay opacity-0 transition-opacity duration-300"></div>
+            <div class="absolute right-0 top-0 h-full w-[80%] max-w-sm bg-[#f0f4f8] shadow-2xl transform translate-x-full transition-transform duration-400 flex flex-col pt-24 px-8" id="menu-panel">
+                <nav class="flex flex-col gap-5" id="menu-nav">
+                    <a href="#filieres" class="menu-link text-xl font-semibold text-slate-900 hover:text-[#0f2d52] transition-colors">Nos filières</a>
+                    <a href="#pourquoi" class="menu-link text-xl font-semibold text-slate-900 hover:text-[#0f2d52] transition-colors">Pourquoi nous ?</a>
+                    <a href="#admission" class="menu-link text-xl font-semibold text-slate-900 hover:text-[#0f2d52] transition-colors">Admission</a>
+                    <a href="#temoignages" class="menu-link text-xl font-semibold text-slate-900 hover:text-[#0f2d52] transition-colors">Témoignages</a>
+                    <a href="#contact" class="menu-link text-xl font-semibold text-slate-900 hover:text-[#0f2d52] transition-colors">Contact</a>
+                </nav>
+                <div class="menu-link mt-8">
+                    <a href="#contact" class="block w-full text-center bg-[#0f2d52] text-white text-sm font-semibold px-6 py-4 rounded-full hover:bg-blue-900 transition-all duration-300">
+                        S'inscrire maintenant
+                    </a>
+                </div>
+                <div class="menu-link mt-auto mb-10">
+                    <p class="text-xs text-slate-500">© 2026 CFP Art & Métiers de Kasapa</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= HERO ================= -->
+        <section class="bg-gradient-to-b from-[#dbeafe] via-[#bfdbfe] to-[#0f2d52] rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-12 text-center relative overflow-hidden shadow-sm mb-12 md:mb-20">
+            <div class="max-w-3xl mx-auto pt-2 md:pt-4 pb-6 md:pb-8 flex flex-col items-center">
+                <div class="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-1.5 rounded-full text-xs font-semibold text-[#0f2d52] mb-4 md:mb-6">
+                    <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                    Inscriptions ouvertes — Session 2026-2027
+                </div>
+
+                <h1 class="text-2xl sm:text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-3 md:mb-4 leading-tight">
+                    CENTRE DE FORMATION PROFESSIONNELLE
+                    <br class="hidden sm:block">  ART ET METIERS DE KASAPA
+                </h1>
+
+                <p class="text-slate-700 text-sm sm:text-base max-w-xl mb-6 md:mb-8 leading-relaxed px-2 sm:px-0">
+                    Le Centre de Formation Professionnelle Art & Métiers de Kasapa vous offre 17 filières de formation pratique, encadrées par des experts et reconnues par l'État.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+                    <a href="#filieres" class="bg-[#0f2d52] text-white text-xs sm:text-sm font-semibold px-6 py-3 rounded-full hover:bg-blue-900 transition-all duration-300 hover:shadow-lg text-center">
+                        Découvrir nos filières
+                    </a>
+                    <a href="#contact" class="bg-white/90 backdrop-blur-sm text-[#0f2d52] text-xs sm:text-sm font-semibold px-6 py-3 rounded-full hover:bg-white transition-all duration-300 border border-white/50 text-center">
+                        Prendre contact
+                    </a>
+                </div>
+            </div>
+
+            <div class="mt-4 md:mt-6 -mb-6 sm:-mb-8 md:-mb-12 rounded-xl md:rounded-2xl overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=1200&auto=format&fit=crop" 
+                     alt="Atelier de formation professionnelle" 
+                     class="w-full h-48 sm:h-64 md:h-80 lg:h-96 object-cover object-center rounded-xl md:rounded-2xl opacity-90 mix-blend-multiply img-zoom">
+            </div>
+        </section>
+
+        <!-- ================= STATS ================= -->
+        <section class="mb-12 md:mb-16">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                <div class="bg-white rounded-2xl p-5 md:p-6 text-center shadow-sm border border-blue-100">
+                    <p class="stat-number text-3xl md:text-4xl font-extrabold mb-1">17</p>
+                    <p class="text-xs md:text-sm text-slate-500 font-medium">Filières de formation</p>
+                </div>
+                <div class="bg-white rounded-2xl p-5 md:p-6 text-center shadow-sm border border-blue-100">
+                    <p class="stat-number text-3xl md:text-4xl font-extrabold mb-1">1 200+</p>
+                    <p class="text-xs md:text-sm text-slate-500 font-medium">Apprenants formés</p>
+                </div>
+                <div class="bg-white rounded-2xl p-5 md:p-6 text-center shadow-sm border border-blue-100">
+                    <p class="stat-number text-3xl md:text-4xl font-extrabold mb-1">85%</p>
+                    <p class="text-xs md:text-sm text-slate-500 font-medium">Taux d'insertion</p>
+                </div>
+                <div class="bg-white rounded-2xl p-5 md:p-6 text-center shadow-sm border border-blue-100">
+                    <p class="stat-number text-3xl md:text-4xl font-extrabold mb-1">25+</p>
+                    <p class="text-xs md:text-sm text-slate-500 font-medium">Formateurs experts</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= POURQUOI ================= -->
+        <section id="pourquoi" class="mb-12 md:mb-20">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-start mb-8 md:mb-12">
+                <div class="space-y-4 md:space-y-6">
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 leading-tight">
+                        Pourquoi choisir le CFP Art & Métiers de Kasapa ?
+                    </h2>
+                    <a href="#contact" class="inline-block bg-[#0f2d52] text-white text-xs sm:text-sm font-semibold px-6 py-3 rounded-full hover:bg-blue-900 transition-all duration-300 hover:shadow-lg">
+                        Rejoindre le centre
+                    </a>
+                </div>
+                <div class="flex items-center">
+                    <p class="text-lg sm:text-xl md:text-2xl text-slate-700 font-medium leading-relaxed">
+                        Une formation pratique, accessible et reconnue qui vous prépare directement au marché de l'emploi et à l'entrepreneuriat.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+                <div class="bento-card bg-[#bfdbfe] rounded-2xl p-5 md:p-6 flex flex-col justify-between min-h-[220px] sm:min-h-[260px] relative overflow-hidden sm:col-span-2 md:col-span-1">
+                    <div class="z-10">
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2">Formation 100% pratique</h3>
+                    </div>
+                    <div class="z-10 max-w-[240px]">
+                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                            Apprenez en faisant. Nos ateliers sont équipés de matériel professionnel pour une immersion totale dans votre futur métier.
+                        </p>
+                    </div>
+                    <div class="absolute right-2 bottom-2 w-28 h-28 md:w-32 md:h-32 opacity-80 pointer-events-none">
+                        <div class="w-full h-full bg-blue-400/30 rounded-full blur-xl"></div>
+                    </div>
+                </div>
+
+                <div class="bento-card bg-[#0f2d52] text-white rounded-2xl p-5 md:p-6 flex flex-col justify-between min-h-[220px] sm:min-h-[260px]">
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-bold mb-2">Formation gratuite</h3>
+                    </div>
+                    <div>
+                        <p class="text-xs sm:text-sm text-blue-200 leading-relaxed">
+                            Changer le texte ici
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bento-card bg-[#0f2d52] text-white rounded-2xl p-5 md:p-6 flex flex-col justify-between min-h-[220px] sm:min-h-[260px]">
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-bold mb-2">Accessible à<br>tous</h3>
+                    </div>
+                    <div>
+                        <p class="text-xs sm:text-sm text-blue-200 leading-relaxed">
+                            Frais de formation abordables, pour tous les âges et horaires flexibles pour les jeunes et adultes en reconversion.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= NOS 17 FILIÈRES ================= -->
+        <section id="filieres" class="mb-12 md:mb-20">
+            <div class="text-center mb-10 md:mb-14">
+                <span class="text-xs font-medium text-blue-400 uppercase tracking-wider">Nos domaines d'excellence</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mt-2">Nos 17 filières de formation</h2>
+                <p class="text-sm text-slate-600 max-w-lg mx-auto mt-3 leading-relaxed">
+                    De l'esthétique à la filmologie, en passant par l'anglais et la mécanique — trouvez la formation qui vous correspond.
+                </p>
+            </div>
+
+            <!-- Grille des 17 filières -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+
+                <!-- Filière 1 : Esthétique -->
+                <div class="filiere-card bg-white rounded-2xl p-6 shadow-sm border border-blue-100/80 flex items-start gap-5">
+                    <div class="icon-ring w-[52px] h-[52px] rounded-full p-[2.5px] shrink-0 shadow-sm">
+                        <div class="icon-inner w-full h-full rounded-full bg-white flex items-center justify-center transition-colors duration-300">
+                            <svg class="w-[22px] h-[22px] text-[#0f2d52]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+                                <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                                <line x1="9" y1="9" x2="9.01" y2="9"/>
+                                <line x1="15" y1="9" x2="15.01" y2="9"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="pt-0.5">
+                        <h3 class="font-bold text-[15px] text-slate-900 leading-snug mb-1">Esthétique</h3>
+                        <p class="text-[13px] text-slate-500 leading-relaxed">Soins du visage, du corps, maquillage professionnel et techniques de beauté.</p>
+                    </div>
+                </div>
+
+                <!-- Filière 2 : Coupe et couture -->
+                <div class="filiere-card bg-white rounded-2xl p-6 shadow-sm border border-blue-100/80 flex items-start gap-5">
+                    <div class="icon-ring w-[52px] h-[52px] rounded-full p-[2.5px] shrink-0 shadow-sm">
+                        <div class="icon-inner w-full h-full rounded-full bg-white flex items-center justify-center transition-colors duration-300">
+                            <svg class="w-[22px] h-[22px] text-[#0f2d52]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="6" cy="6" r="3"/>
+                                <circle cx="6" cy="18" r="3"/>
+                                <line x1="20" y1="4" x2="8.12" y2="15.88"/>
+                                <line x1="14.47" y1="14.48" x2="20" y2="20"/>
+                                <line x1="8.12" y1="8.12" x2="12" y2="12"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="pt-0.5">
+                        <h3 class="font-bold text-[15px] text-slate-900 leading-snug mb-1">Coupe et Couture</h3>
+                        <p class="text-[13px] text-slate-500 leading-relaxed">Confection de vêtements, patronage, stylisme et gestion d'une boutique de mode.</p>
+                    </div>
+                </div>
+
+                <!-- Filière 3 : Alphabétisation -->
+                <div class="filiere-card bg-white rounded-2xl p-6 shadow-sm border border-blue-100/80 flex items-start gap-5">
+                    <div class="icon-ring w-[52px] h-[52px] rounded-full p-[2.5px] shrink-0 shadow-sm">
+                        <div class="icon-inner w-full h-full rounded-full bg-white flex items-center justify-center transition-colors duration-300">
+                            <svg class="w-[22px] h-[22px] text-[#0f2d52]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                                <path d="M8 7h6"/>
+                                <path d="M8 11h4"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="pt-0.5">
+                        <h3 class="font-bold text-[15px] text-slate-900 leading-snug mb-1">Alphabétisation</h3>
+                        <p class="text-[13px] text-slate-500 leading-relaxed">Apprentissage de la lecture, de l'écriture et du calcul pour tous les niveaux.</p>
+                    </div>
+                </div>
+
+                <!-- Filière 4 : Anglais -->
+                <div class="filiere-card bg-white rounded-2xl p-6 shadow-sm border border-blue-100/80 flex items-start gap-5">
+                    <div class="icon-ring w-[52px] h-[52px] rounded-full p-[2.5px] shrink-0 shadow-sm">
+                        <div class="icon-inner w-full h-full rounded-full bg-white flex items-center justify-center transition-colors duration-300">
+                            <svg class="w-[22px] h-[22px] text-[#0f2d52]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="pt-0.5">
+                        <h3 class="font-bold text-[15px] text-slate-900 leading-snug mb-1">Anglais</h3>
+                        <p class="text-[13px] text-slate-500 leading-relaxed">Cours d'anglais général, conversation, grammaire et préparation aux examens.</p>
+                    </div>
+                </div>
+
+                <!-- Filière 5 : Électricité -->
+                <div class="filiere-card bg-white rounded-2xl p-6 shadow-sm border border-blue-100/80 flex items-start gap-5">
+                    <div class="icon-ring w-[52px] h-[52px] rounded-full p-[2.5px] shrink-0 shadow-sm">
+                        <div class="icon-inner w-full h-full rounded-full bg-white flex items-center justify-center transition-colors duration-300">
+                            <svg class="w-[22px] h-[22px] text-[#0f2d52]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="pt-0.5">
+                        <h3 class="font-bold text-[15px] text-slate-900 leading-snug mb-1">Électricité</h3>
+                        <p class="text-[13px] text-slate-500 leading-relaxed">Installation, maintenance et dépannage électrique résidentiel et industriel.</p>
+                    </div>
+                </div>
+
+                <!-- Filière 6 : Construction -->
+                <div class="filiere-card bg-white rounded-2xl p-6 shadow-sm border border-blue-100/80 flex items-start gap-5">
+                    <div class="icon-ring w-[52px] h-[52px] rounded-full p-[2.5px] shrink-0 shadow-sm">
+                        <div class="icon-inner w-full h-full rounded-full bg-white flex items-center justify-center transition-colors duration-300">
+                            <svg class="w-[22px] h-[22px] text-[#0f2d52]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                <path d="M3 9h18"/>
+                                <path d="M3 15h18"/>
+                                <path d="M9 3v18"/>
+                                <path d="M15 3v18"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="pt-0.5">
+                        <h3 class="font-bold text-[15px] text-slate-900 leading-snug mb-1">Construction</h3>
+                        <p class="text-[13px] text-slate-500 leading-relaxed">Maçonnerie, gros œuvre, lecture de plans et techniques de construction moderne.</p>
+                    </div>
+                </div>
+
+                <!-- Filière 7 : Décoration -->
+                <div class="filiere-card bg-white rounded-2xl p-6 shadow-sm border border-blue-100/80 flex items-start gap-5">
+                    <div class="icon-ring w-[52px] h-[52px] rounded-full p-[2.5px] shrink-0 shadow-sm">
+                        <div class="icon-inner w-full h-full rounded-full bg-white flex items-center justify-center transition-colors duration-300">
+                            <svg class="w-[22px] h-[22px] text-[#0f2d52]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m14.622 17.897-10.68-2.913"/>
+                                <path d="M18.376 2.622a1 1 0 1 1 3.002 3.002L17.36 9.643a.5.5 0 0 0 0 .707l.944.944a2.41 2.41 0 0 1 0 3.408l-.944.944a.5.5 0 0 1-.707 0L8.354 7.348a.5.5 0 0 1 0-.707l.944-.944a2.41 2.41 0 0 1 3.408 0l.944.944a.5.5 0 0 0 .707 0z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="pt-0.5">
+                        <h3 class="font-bold text-[15px] text-slate-900 leading-snug mb-1">Décoration</h3>
+                        <p class="text-[13px] text-slate-500 leading-relaxed">Techniques de peinture, enduits, papier peint et aménagement d'intérieur.</p>
+                    </div>
+                </div>
+
+                <!-- Filière 8 : Informatique -->
+                <div class="filiere-card bg-white rounded-2xl p-6 shadow-sm border border-blue-100/80 flex items-start gap-5">
+                    <div class="icon-ring w-[52px] h-[52px] rounded-full p-[2.5px] shrink-0 shadow-sm">
+                        <div class="icon-inner w-full h-full rounded-full bg-white flex items-center justify-center transition-colors duration-300">
+                            <svg class="w-[22px] h-[22px] text-[#0f2d52]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                                <line x1="8" y1="21" x2="16" y2="21"/>
+                                <line x1="12" y1="17" x2="12" y2="21"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="pt-0.5">
+                        <h3 class="font-bold text-[15px] text-slate-900 leading-snug mb-1">Informatique</h3>
+                        <p class="text-[13px] text-slate-500 leading-relaxed">Maîtrise des outils numériques, bureautique, maintenance et réseaux informatiques.</p>
+                    </div>
+                </div>
+
+                <!-- Filière 9 : Hôtellerie -->
+                <div class="filiere-card bg-white rounded-2xl p-6 shadow-sm border border-blue-100/80 flex items-start gap-5">
+                    <div class="icon-ring w-[52px] h-[52px] rounded-full p-[2.5px] shrink-0 shadow-sm">
+                        <div class="icon-inner w-full h-full rounded-full bg-white flex items-center justify-center transition-colors duration-300">
+                            <svg class="w-[22px] h-[22px] text-[#0f2d52]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/>
+                                <path d="M9 22v-4h6v4"/>
+                                <path d="M8 6h.01"/>
+                                <path d="M16 6h.01"/>
+                                <path d="M12 6h.01"/>
+                                <path d="M12 10h.01"/>
+                                <path d="M12 14h.01"/>
+                                <path d="M16 10h.01"/>
+                                <path d="M16 14h.01"/>
+                                <path d="M8 10h.01"/>
+                                <path d="M8 14h.01"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="pt-0.5">
+                        <h3 class="font-bold text-[15px] text-slate-900 leading-snug mb-1">Hôtellerie</h3>
+                        <p class="text-[13px] text-slate-500 leading-relaxed">Accueil, service en salle, gestion d'établissement hôtelier et tourisme.</p>
+                    </div>
+                </div>
+
+                <!-- Filière 10 : Menuiserie -->
+                <div class="filiere-card bg-white rounded-2xl p-6 shadow-sm border border-blue-100/80 flex items-start gap-5">
+                    <div class="icon-ring w-[52px] h-[52px] rounded-full p-[2.5px] shrink-0 shadow-sm">
+                        <div class="icon-inner w-full h-full rounded-full bg-white flex items-center justify-center transition-colors duration-300">
+                            <svg class="w-[22px] h-[22px] text-[#0f2d52]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 21l9-9"/>
+                                <path d="M12 3v6h6"/>
+                                <path d="m15 6 6 6"/>
+                                <path d="M3 3l18 18"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="pt-0.5">
+                        <h3 class="font-bold text-[15px] text-slate-900 leading-snug mb-1">Menuiserie</h3>
+                        <p class="text-[13px] text-slate-500 leading-relaxed">Fabrication et pose de meubles, portes, fenêtres et aménagements en bois et aluminium.</p>
+                    </div>
+                </div>
+
+                <!-- Filière 11 : Peinture -->
+                <div class="filiere-card bg-white rounded-2xl p-6 shadow-sm border border-blue-100/80 flex items-start gap-5">
+                    <div class="icon-ring w-[52px] h-[52px] rounded-full p-[2.5px] shrink-0 shadow-sm">
+                        <div class="icon-inner w-full h-full rounded-full bg-white flex items-center justify-center transition-colors duration-300">
+                            <svg class="w-[22px] h-[22px] text-[#0f2d52]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M19 11h-1.586l-5.293-5.293a1 1 0 0 0-1.414 0L5.586 11H4a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h15a1 1 0 0 0 1-1v-7a1 1 0 0 0-1-1z"/>
+                                <path d="M7 11V7a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v4"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="pt-0.5">
+                        <h3 class="font-bold text-[15px] text-slate-900 leading-snug mb-1">Peinture</h3>
+                        <p class="text-[13px] text-slate-500 leading-relaxed">Techniques de peinture, préparation des surfaces et finitions décoratives.</p>
+                    </div>
+                </div>
+
+                <!-- Filière 12 : Auto-école -->
+                <div class="filiere-card bg-white rounded-2xl p-6 shadow-sm border border-blue-100/80 flex items-start gap-5">
+                    <div class="icon-ring w-[52px] h-[52px] rounded-full p-[2.5px] shrink-0 shadow-sm">
+                        <div class="icon-inner w-full h-full rounded-full bg-white flex items-center justify-center transition-colors duration-300">
+                            <svg class="w-[22px] h-[22px] text-[#0f2d52]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <circle cx="12" cy="12" r="3"/>
+                                <path d="M12 2v4"/>
+                                <path d="M12 18v4"/>
+                                <path d="M2 12h4"/>
+                                <path d="M18 12h4"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="pt-0.5">
+                        <h3 class="font-bold text-[15px] text-slate-900 leading-snug mb-1">Auto-école</h3>
+                        <p class="text-[13px] text-slate-500 leading-relaxed">Code de la route, conduite pratique et préparation au permis de conduire.</p>
+                    </div>
+                </div>
+
+                <!-- Filière 13 : Journalisme -->
+                <div class="filiere-card bg-white rounded-2xl p-6 shadow-sm border border-blue-100/80 flex items-start gap-5">
+                    <div class="icon-ring w-[52px] h-[52px] rounded-full p-[2.5px] shrink-0 shadow-sm">
+                        <div class="icon-inner w-full h-full rounded-full bg-white flex items-center justify-center transition-colors duration-300">
+                            <svg class="w-[22px] h-[22px] text-[#0f2d52]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                                <line x1="12" y1="19" x2="12" y2="23"/>
+                                <line x1="8" y1="23" x2="16" y2="23"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="pt-0.5">
+                        <h3 class="font-bold text-[15px] text-slate-900 leading-snug mb-1">Journalisme</h3>
+                        <p class="text-[13px] text-slate-500 leading-relaxed">Rédaction, reportage, présentation radio/télé et communication digitale.</p>
+                    </div>
+                </div>
+
+                <!-- Filière 14 : Infirmerie -->
+                <div class="filiere-card bg-white rounded-2xl p-6 shadow-sm border border-blue-100/80 flex items-start gap-5">
+                    <div class="icon-ring w-[52px] h-[52px] rounded-full p-[2.5px] shrink-0 shadow-sm">
+                        <div class="icon-inner w-full h-full rounded-full bg-white flex items-center justify-center transition-colors duration-300">
+                            <svg class="w-[22px] h-[22px] text-[#0f2d52]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="pt-0.5">
+                        <h3 class="font-bold text-[15px] text-slate-900 leading-snug mb-1">Infirmerie</h3>
+                        <p class="text-[13px] text-slate-500 leading-relaxed">Soins infirmiers de base, premiers secours, hygiène et assistance médicale.</p>
+                    </div>
+                </div>
+
+                <!-- Filière 15 : Mécanique générale -->
+                <div class="filiere-card bg-white rounded-2xl p-6 shadow-sm border border-blue-100/80 flex items-start gap-5">
+                    <div class="icon-ring w-[52px] h-[52px] rounded-full p-[2.5px] shrink-0 shadow-sm">
+                        <div class="icon-inner w-full h-full rounded-full bg-white flex items-center justify-center transition-colors duration-300">
+                            <svg class="w-[22px] h-[22px] text-[#0f2d52]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="3"/>
+                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="pt-0.5">
+                        <h3 class="font-bold text-[15px] text-slate-900 leading-snug mb-1">Mécanique Générale</h3>
+                        <p class="text-[13px] text-slate-500 leading-relaxed">Diagnostic, réparation et entretien des véhicules et machines diverses.</p>
+                    </div>
+                </div>
+
+                <!-- Filière 16 : Hôtesse de l'air, Restaurant, Bureaux -->
+                <div class="filiere-card bg-white rounded-2xl p-6 shadow-sm border border-blue-100/80 flex items-start gap-5">
+                    <div class="icon-ring w-[52px] h-[52px] rounded-full p-[2.5px] shrink-0 shadow-sm">
+                        <div class="icon-inner w-full h-full rounded-full bg-white flex items-center justify-center transition-colors duration-300">
+                            <svg class="w-[22px] h-[22px] text-[#0f2d52]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M2 12h20"/>
+                                <path d="M20 12v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8"/>
+                                <path d="m4 8 16-4"/>
+                                <path d="m8.86 6.78-.45-1.81a2 2 0 0 1 1.45-2.43l1.94-.48a2 2 0 0 1 2.43 1.46l.45 1.8"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="pt-0.5">
+                        <h3 class="font-bold text-[15px] text-slate-900 leading-snug mb-1">Hôtesse de l'Air, Restaurant, Bureaux</h3>
+                        <p class="text-[13px] text-slate-500 leading-relaxed">Service aérien, restauration, accueil et secrétariat de direction.</p>
+                    </div>
+                </div>
+
+                <!-- Filière 17 : Filmologie -->
+                <div class="filiere-card bg-white rounded-2xl p-6 shadow-sm border border-blue-100/80 flex items-start gap-5">
+                    <div class="icon-ring w-[52px] h-[52px] rounded-full p-[2.5px] shrink-0 shadow-sm">
+                        <div class="icon-inner w-full h-full rounded-full bg-white flex items-center justify-center transition-colors duration-300">
+                            <svg class="w-[22px] h-[22px] text-[#0f2d52]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+                                <circle cx="12" cy="13" r="3"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="pt-0.5">
+                        <h3 class="font-bold text-[15px] text-slate-900 leading-snug mb-1">Filmologie</h3>
+                        <p class="text-[13px] text-slate-500 leading-relaxed">Réalisation, montage vidéo, prise de vue et production audiovisuelle.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= PARTENAIRES ================= -->
+        <section class="border-t border-b border-blue-200/60 py-6 md:py-8 mb-12 md:mb-20">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
+                <p class="text-xs text-slate-500 font-medium max-w-[200px] leading-tight text-center md:text-left">
+                    Reconnu et soutenu par les meilleures institutions.
+                </p>
+                <div class="flex flex-wrap items-center justify-center md:justify-end gap-4 sm:gap-6 lg:gap-8 grayscale opacity-70 text-xs font-bold text-slate-700">
+                    <span class="border border-slate-400 px-2 py-1 text-[10px]">Ministère de l'EPST</span>
+                    <span class="flex items-center gap-1">🇨🇩 Gouvernement RDC</span>
+                    <span class="tracking-widest font-serif text-sm">PNUD</span>
+                    <span class="font-sans">UNICEF</span>
+                    <span class="font-serif hidden sm:inline">GIZ</span>
+                    <span class="flex items-center gap-1 hidden sm:inline">❖ FPM</span>
+                    <span class="flex items-center gap-1 hidden md:inline">💎 SNEL</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= ADMISSION ================= -->
+        <section id="admission" class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start mb-12 md:mb-20">
+            <div class="space-y-3 md:space-y-4">
+                <span class="text-xs font-medium text-blue-400 uppercase tracking-wider">Processus d'admission</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-900">Comment s'inscrire ?</h2>
+                <p class="text-sm text-slate-600 max-w-sm leading-relaxed pt-1 md:pt-2">
+                    Trois étapes simples pour intégrer le centre et démarrer votre formation professionnelle dans la filière de votre choix.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-sm border border-blue-100 flex flex-col justify-between min-h-[350px] sm:min-h-[400px] md:min-h-[450px] relative overflow-hidden">
+                <div class="space-y-5 md:space-y-6 z-10">
+                    <h3 class="text-xl sm:text-2xl font-bold text-slate-900">Votre parcours en 3 étapes</h3>
+                    <div class="space-y-4">
+                        <div class="flex gap-4 items-start">
+                            <div class="w-8 h-8 rounded-full bg-[#0f2d52] text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">1</div>
+                            <div>
+                                <p class="font-semibold text-sm text-slate-900">Choisissez votre filière</p>
+                                <p class="text-xs text-slate-500 leading-relaxed">Consultez nos 17 filières et sélectionnez celle qui correspond à vos ambitions.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <div class="w-8 h-8 rounded-full bg-[#0f2d52] text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">2</div>
+                            <div>
+                                <p class="font-semibold text-sm text-slate-900">Déposez votre dossier</p>
+                                <p class="text-xs text-slate-500 leading-relaxed">Pièce d'identité, photos, diplôme (ou attestation de niveau) et frais d'inscription.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <div class="w-8 h-8 rounded-full bg-[#0f2d52] text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">3</div>
+                            <div>
+                                <p class="font-semibold text-sm text-slate-900">Débutez votre formation</p>
+                                <p class="text-xs text-slate-500 leading-relaxed">Recevez votre convocation et intégrez les ateliers pour une formation pratique immédiate.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#contact" class="inline-flex items-center text-xs sm:text-sm font-semibold text-[#0f2d52] hover:gap-2 transition-all group">
+                        <span class="mr-1 group-hover:mr-2 transition-all">→</span> Télécharger la brochure
+                    </a>
+                </div>
+                <div class="mt-6 md:mt-8 relative flex justify-center items-end">
+                    <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=600&auto=format&fit=crop" 
+                         alt="Étudiants en formation" 
+                         class="w-full h-48 sm:h-56 md:h-64 object-cover rounded-xl md:rounded-2xl mix-blend-multiply opacity-90 img-zoom">
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TÉMOIGNAGES ================= -->
+        <section id="temoignages" class="mb-12 md:mb-20">
+            <div class="text-center mb-8 md:mb-10">
+                <span class="text-xs font-medium text-blue-400 uppercase tracking-wider">Ils nous font confiance</span>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mt-2">Témoignages de nos apprenants</h2>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                <div class="bg-white rounded-2xl p-5 md:p-6 shadow-sm border border-blue-100">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-full bg-[#bfdbfe] flex items-center justify-center text-sm font-bold text-[#0f2d52]">MK</div>
+                        <div>
+                            <p class="text-sm font-bold text-slate-900">Marie Kabongo</p>
+                            <p class="text-[10px] text-slate-500">Filière Coupe et Couture</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">"Grâce au CFP de Kasapa, j'ai ouvert ma propre boutique de couture à Lubumbashi. La formation était très pratique et les formateurs passionnés."</p>
+                </div>
+                <div class="bg-white rounded-2xl p-5 md:p-6 shadow-sm border border-blue-100">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-full bg-[#bfdbfe] flex items-center justify-center text-sm font-bold text-[#0f2d52]">JM</div>
+                        <div>
+                            <p class="text-sm font-bold text-slate-900">Jean Mbuyi</p>
+                            <p class="text-[10px] text-slate-500">Filière Électricité</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">"J'ai trouvé un emploi stable chez SNEL seulement 2 mois après mon diplôme. Le stage en entreprise m'a ouvert les portes du marché du travail."</p>
+                </div>
+                <div class="filiere-card bg-white rounded-2xl p-5 md:p-6 shadow-sm border border-blue-100 sm:col-span-2 lg:col-span-1">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-full bg-[#bfdbfe] flex items-center justify-center text-sm font-bold text-[#0f2d52]">SN</div>
+                        <div>
+                            <p class="text-sm font-bold text-slate-900">Sophie Ngalula</p>
+                            <p class="text-[10px] text-slate-500">Filière Informatique</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">"La bourse d'étude m'a permis de suivre la formation sans souci financier. Aujourd'hui je suis assistante administrative dans une ONG internationale."</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CONTACT / CTA ================= -->
+        <section id="contact" class="bg-[#0f2d52] rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-12 text-center relative overflow-hidden mb-12 md:mb-20">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-blue-400/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-64 h-64 bg-cyan-400/10 rounded-full blur-3xl"></div>
+            <div class="relative z-10 max-w-2xl mx-auto">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 md:mb-4">
+                    Prêt à construire votre avenir ?
+                </h2>
+                <p class="text-blue-200 text-sm sm:text-base max-w-md mx-auto mb-6 md:mb-8 leading-relaxed">
+                    Rejoignez dès maintenant le CFP Art & Métiers de Kasapa. Les inscriptions pour la session 2026-2027 sont ouvertes.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                    <a href="tel:+243859272359" class="bg-white text-[#0f2d52] text-xs sm:text-sm font-bold px-6 py-3 rounded-full hover:bg-blue-50 transition-all duration-300 text-center">
+                        📞 Appeler le centre
+                    </a>
+                    <a href="mailto:contact@cfpkasapa.cd" class="bg-transparent border border-blue-400/40 text-white text-xs sm:text-sm font-semibold px-6 py-3 rounded-full hover:bg-white/10 transition-all duration-300 text-center">
+                        ✉️ Envoyer un email
+                    </a>
+                </div>
+                <div class="mt-8 pt-6 border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
+                    <div>
+                        <p class="text-[10px] text-blue-300 uppercase tracking-wider mb-1">Adresse</p>
+                        <p class="text-xs sm:text-sm text-white">Quartier Kasapa, Commune Annexe<br>Arrêt au sein de l'École Vodacom<br>Lubumbashi, RDC</p>
+                    </div>
+                    <div>
+                        <p class="text-[10px] text-blue-300 uppercase tracking-wider mb-1">Horaires</p>
+                        <p class="text-xs sm:text-sm text-white">Lun — Ven : 08h00 — 16h00<br>Samedi : 08h00 — 12h00</p>
+                    </div>
+                    <div>
+                        <p class="text-[10px] text-blue-300 uppercase tracking-wider mb-1">Contact</p>
+                        <p class="text-xs sm:text-sm text-white">+243 859 272 359<br>contact@cfpkasapa.cd</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= FOOTER ================= -->
+        <footer class="pt-8 border-t border-blue-200/60">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-2 font-bold text-sm text-slate-900">
+                    <!-- Espace Logo Footer Responsive -->
+                    <div class="shrink-0">
+                        <img 
+                            src="assets/logo.png" 
+                            alt="Logo CFP Art & Métiers de Kasapa" 
+                            class="w-7 h-7 sm:w-8 sm:h-8 object-contain rounded-md"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                        >
+                        <!-- Fallback si le logo n'est pas chargé -->
+                        <div class="w-7 h-7 sm:w-8 sm:h-8 bg-[#0f2d52] rounded-md flex items-center justify-center text-white font-extrabold text-[10px] hidden">
+                            CF
+                        </div>
+                    </div>
+                    <div class="leading-tight">
+                        <span class="block">CFP Art & Métiers</span>
+                        <span class="block text-[10px] font-medium text-slate-500">de Kasapa</span>
+                    </div>
+                </div>
+                <div class="flex gap-4 text-xs text-slate-500">
+                    <a href="#" class="hover:text-[#0f2d52] transition">Mentions légales</a>
+                    <a href="#" class="hover:text-[#0f2d52] transition">Politique de confidentialité</a>
+                </div>
+                <p class="text-xs text-slate-500">© 2026 CFP Art & Métiers de Kasapa</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- ================= SCRIPT ================= -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuOverlay = document.getElementById('menu-overlay');
+        const menuPanel = document.getElementById('menu-panel');
+        let isOpen = false;
+
+        function toggleMenu() {
+            isOpen = !isOpen;
+            menuBtn.setAttribute('aria-expanded', isOpen);
+
+            if (isOpen) {
+                document.body.style.overflow = 'hidden';
+                mobileMenu.classList.remove('pointer-events-none', 'opacity-0');
+                mobileMenu.classList.add('pointer-events-auto', 'opacity-100');
+                menuOverlay.classList.remove('opacity-0');
+                menuOverlay.classList.add('opacity-100');
+                menuPanel.classList.remove('translate-x-full');
+                menuPanel.classList.add('translate-x-0');
+                menuBtn.classList.add('menu-open');
+                setTimeout(() => { mobileMenu.classList.add('menu-opened'); }, 100);
+            } else {
+                document.body.style.overflow = '';
+                menuBtn.classList.remove('menu-open');
+                mobileMenu.classList.remove('menu-opened');
+                menuPanel.classList.remove('translate-x-0');
+                menuPanel.classList.add('translate-x-full');
+                menuOverlay.classList.remove('opacity-100');
+                menuOverlay.classList.add('opacity-0');
+                setTimeout(() => {
+                    mobileMenu.classList.remove('pointer-events-auto', 'opacity-100');
+                    mobileMenu.classList.add('pointer-events-none', 'opacity-0');
+                }, 400);
+            }
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+        menuOverlay.addEventListener('click', toggleMenu);
+
+        document.querySelectorAll('#menu-nav a').forEach(link => {
+            link.addEventListener('click', () => { if (isOpen) toggleMenu(); });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && isOpen) toggleMenu();
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768 && isOpen) toggleMenu();
+        });
+    </script>
+
+</body>
+</html>
